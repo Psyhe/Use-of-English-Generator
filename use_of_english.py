@@ -13,7 +13,6 @@ def display_menu(article_list):
         print(f"{i}. {article}")
     print("0. Exit")
 
-
 class Text_without_words:
     def __init__(self, text_without_words, list_of_removed_words):
         self.text_without_words =  text_without_words
@@ -48,7 +47,6 @@ def number_the_empty_spaces(text):
         counter += 1
         return result
 
-    # Use the sub() function with the replacement function
     result_string = pattern.sub(replacement, text)
 
     return result_string
@@ -59,10 +57,6 @@ def remove_words(text, words):
         if w in words:
             text = text.replace(" " + w + " ", "._______ ")
 
-
-    # for word in words:
-    #     text = text.replace(" " + word + " ", " " + str(counter)+ "._______ ")
-    #     counter += 1
     return number_the_empty_spaces(text)
 
 def divide_paragraphs(text):
@@ -111,7 +105,6 @@ def generate_text(name):
     list = w_questions()
     text = remove_words(text, list)
     print(text)
-    # divide_paragraphs(text)
 
 def enter_article_number(number_of_articles):
     try:
