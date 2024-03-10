@@ -94,7 +94,7 @@ def check_input(list_of_words):
     counter = 1
     for word in list_of_words:
         user_input = input(str(counter) + ". ")
-        if user_input == word:
+        if user_input.lower() == word.lower():
             print("Correct")
         else:
             print("Incorrect")
