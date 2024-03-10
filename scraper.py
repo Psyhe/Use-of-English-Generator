@@ -2,18 +2,6 @@ import requests
 import os
 from bs4 import BeautifulSoup as bs
 
-def get_bbc_text(url:str) -> list:    
-    article = requests.get(url)
-    soup = bs(article.content, "html.parser")
-    all_text_blocks = soup.find_all("div", {"data-component": "text-block"})
-    text = ""
-
-    for text_block in all_text_blocks:
-        text += text_block.get_text()
-        text += "\n"
-
-    return text
-
 def write_to_file(text:str, filename:str) -> None:
     
     folder_path = 'texts'
@@ -25,10 +13,20 @@ def write_to_file(text:str, filename:str) -> None:
     with open(filename, "w") as file:
         file.write(text)
 
-def generate_file(url:str, filename:str) -> None:
-    text = get_bbc_text(url)
-    write_to_file(text, filename)
+def get_bbc_text(url:str) -> list:    
+    article = requests.get(url)
+    soup = bs(article.content, "html.parser")
+    all_text_blocks = soup.find_all("div", {"data-component": "text-block"})
+
+    title_block = soup.find("h1", {"class": "ssrcss-fmi64d-StyledHeading e10rt3ze0"})
+
+    print(title_block.get_text())
+    text = ""
+
+    for text_block in all_text_blocks:
+        text += text_block.get_text()
+        text += "\n"
 
 if __name__ == "__main__":
-    url = 'https://www.bbc.co.uk/news/world-europe-49345912'
-    generate_file(url, "bbc_text.txt")
+    url = input("Enter the URL of the article: ")
+    get_bbc_text(url)

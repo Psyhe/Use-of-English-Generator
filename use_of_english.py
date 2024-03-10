@@ -3,6 +3,17 @@ import os
 from words import w_questions
 import re
 
+def list_articles(folder_path):
+    articles = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+    return articles
+
+def display_menu(article_list):
+    print("Select an article:")
+    for i, article in enumerate(article_list, start=1):
+        print(f"{i}. {article}")
+    print("0. Exit")
+
+
 class Text_without_words:
     def __init__(self, text_without_words, list_of_removed_words):
         self.text_without_words =  text_without_words
@@ -102,6 +113,28 @@ def generate_text(name):
     print(text)
     # divide_paragraphs(text)
 
+def enter_article_number(number_of_articles):
+    try:
+        choice = int(input("Enter the number of the article you want to use: "))
+        if choice < 0 or choice > number_of_articles:
+            print("Invalid input. Please enter a number between 1 and " + str(number_of_articles) + ".")
+            return enter_article_number(number_of_articles)
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return enter_article_number(number_of_articles)
+    return choice
+
+def choose_article():
+    articles = list_articles(os.path.join(os.getcwd(), "texts"))
+    display_menu(articles)
+
+    choice = enter_article_number(len(articles))
+    
+    return articles[choice-1]
+
+def prepare_task():
+    article = choose_article()
+    run_use_of_language(article)
+
 if __name__ == "__main__":
-    # generate_text("bbc_text.txt")
-    run_use_of_language("bbc_text.txt")
+    prepare_task()
