@@ -20,12 +20,13 @@ def get_bbc_text(url:str) -> list:
 
     title_block = soup.find("h1", {"class": "ssrcss-fmi64d-StyledHeading e10rt3ze0"})
 
-    print(title_block.get_text())
     text = ""
 
     for text_block in all_text_blocks:
         text += text_block.get_text()
         text += "\n"
+
+    write_to_file(text, title_block.get_text() + ".txt")
 
 if __name__ == "__main__":
     url = input("Enter the URL of the article: ")
