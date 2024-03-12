@@ -7,6 +7,6 @@ The user has the option to submit a link to a chosen BBC article to generate a n
 
 The graphical user interface (GUI) is not implemented in this version but is planned for future extensions.
 
-Example of articles:
+Examples of articles:
 https://www.bbc.com/news/world-australia-68508423
 https://www.bbc.co.uk/news/world-europe-49345912
